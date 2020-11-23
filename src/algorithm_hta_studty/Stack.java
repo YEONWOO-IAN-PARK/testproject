@@ -60,6 +60,78 @@ public class Stack {
 		return 0;
 	}
 	
+	public int peek() {
+		if(top != 0) {
+			return top;
+		}
+		return 0;
+	}
 	
+	public int indexOf(int data) {
+		if(top != 0) {
+			for(int i = cursor-1; i>=0; i--) {
+				if(capacity[i] == data) {
+					System.out.println(capacity[i]);
+					return i;
+				}
+			}
+		}
+		return 0;
+	}
+	
+	private int capacitySizeUp(int data) {
+		if(cursor == capacity.length) {  // Stack이 가득 찼을때
+			if((cursor + 1) <= MAX_CAPACITY_SIZE) {
+				int[] capacityCopy = capacity;
+				capacity = new int[capacity.length + 5];
+				System.arraycopy(capacityCopy, 0, capacity, 0, capacity.length);
+				capacity[cursor++] = data;
+				top = data;
+				return 1;
+			} else {
+				System.out.println("Stack의 사이즈가 최대용량인 20을 넘어섰습니다.");
+			}
+		}
+		return 0;
+	}
+	
+	public void clear() {
+        for(int i = cursor -1; i >= 0; i--) {
+            capacity[i] = 0;
+        }
+        top = 0;
+        bottom = 0;
+    }
+
+    public int capacity() {
+        if(top != 0) {
+            return capacity.length;
+        }
+        return 0;
+    }
+
+    public int size() {
+        if(top != 0) {
+            return cursor;
+        }
+        return 0;
+    }
+
+    public boolean isFull() {
+        if (cursor == capacity.length) {
+            return true;
+        }
+        return false;
+    }
+
+    public void printStackData() {
+        if(top != 0) {
+            for (int i = cursor - 1; i >= 0; i--) {
+                System.out.println(capacity[i]);
+            }
+        } else {
+            System.out.println("스택이 비어 있습니다.");
+        }
+    }
 	
 }
